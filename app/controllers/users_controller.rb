@@ -17,7 +17,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      redirect_to signin_path, notice: "Usuário cadastrado com sucesso!"
+      redirect_to signin_path
     else
       render :new
     end
@@ -25,7 +25,7 @@ class UsersController < ApplicationController
  
   def update
     if @user.update(user_params)
-      redirect_to user_url(@user), notice: "Usuário atualizado com sucesso!"
+      redirect_to user_url(@user)
     else
       render :edit
     end
@@ -33,7 +33,7 @@ class UsersController < ApplicationController
 
   def destroy
     @user.destroy
-    redirect_to root_path, notice: "Usuário excluído com sucesso!"
+    redirect_to root_path
   end
 
   def info; end
@@ -46,6 +46,6 @@ class UsersController < ApplicationController
   end
   
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :height, :weight, :pas, :pad, :pam)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :height, :weight, :pas, :pad)
   end
 end
