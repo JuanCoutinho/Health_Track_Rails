@@ -1,0 +1,37 @@
+<h1 class="font-bold text-4xl text-blue-600">Informações Médicas</h1>
+<hr><br>
+
+<p><h2>Pressão Arterial Média:</h2><strong>PAM:</strong> <%= current_user.pam %></p>
+<h1>Situação</h1>
+<% if current_user.pam %>
+  <% if current_user.pam < 120 %>
+    <p>Normal</p>
+  <% elsif current_user.pam < 120-129 %>
+    <p>Elevado</p>
+  <% elsif current_user.pam < 130-139 %>
+    <p>Hipertensão estágio 1</p>>
+  <% elsif current_user.pam < 139-179 %>
+    <p>Hipertensão estágio 1</p>
+  <% elsif current_user.pam > 180 %>
+    <p>Crise Hipertensiva</p>>
+  <% end %>
+  <% else %>
+      <p>IMC não disponível</p>
+<% end %>
+
+<br><hr>
+<p><h2>Índice de Massa Corporal:</h2><strong>IMC:</strong> <%= current_user.imc %></p>
+<h1>Situação</h1>
+<% if current_user.imc %>
+  <% if current_user.imc < 18.5 %>
+    <p>Abaixo do peso</p>
+  <% elsif current_user.imc < 24.9 %>
+    <p>IMC bom</p>
+  <% elsif current_user.imc < 29.9 %>
+    <p>Sobrepeso</p>
+  <% else %>
+    <p class="text-red-500">Obesidade</p>
+  <% end %>
+  <% else %>
+    <p>IMC não disponível</p>
+<% end %>
