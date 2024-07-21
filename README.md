@@ -21,8 +21,8 @@ Para instalar e rodar este projeto localmente, siga os passos abaixo:
 
 1. Clone o repositório:
     ```sh
-    git clone https://github.com/seu-usuario/nome-do-projeto.git
-    cd nome-do-projeto
+    git clone https://github.com/reddevx/Health_Track
+    cd health__track
     ```
 
 2. Instale as dependências:
