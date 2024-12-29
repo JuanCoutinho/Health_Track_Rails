@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   def index
     @users = current_user
+    @users = User.includes(:phones).all
   end
 
   def new
@@ -25,7 +26,7 @@ class UsersController < ApplicationController
  
   def update
     if @user.update(user_params)
-      redirect_to user_url(@user)
+      redirect_to (@user)
     else
       render :edit
     end
@@ -46,6 +47,6 @@ class UsersController < ApplicationController
   end
   
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :height, :weight, :pas, :pad)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :height, :weight, :pas, :pad, :gender, :age)
   end
 end

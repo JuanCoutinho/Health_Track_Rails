@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   root "home#index"
   resources :users, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+  
+  resources :users do
+    resources :phones, except: [:show]
+  end
 
   get 'signup', to: 'users#new'  
   post 'signup', to: 'users#create'

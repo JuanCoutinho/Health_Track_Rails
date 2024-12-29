@@ -1,31 +1,81 @@
-<div id="<%= dom_id user %>">
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Name:</strong>
-    <%= user.name %>
-  </p>
+<div id="<%= dom_id user %>" class="max-w-md mx-auto p-6 bg-white shadow-lg rounded-lg border border-gray-200 mt-10">
+  <h2 class="text-2xl font-bold text-blue-600 mb-5 text-center">Detalhes do Usuário</h2>
+  
+  <div class="space-y-4">
+    <div>
+      <p class="text-gray-600 font-medium">Nome:</p>
+      <p class="text-gray-900 font-bold"><%= user.name %></p>
+    </div>
 
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Email:</strong>
-    <%= user.email %>
-  </p>
+    <div>
+      <p class="text-gray-600 font-medium">Email:</p>
+      <p class="text-gray-900 font-bold"><%= user.email %></p>
+    </div>
 
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Height:</strong>
-    <%= user.height %>
-  </p>
+    <div>
+      <p class="text-gray-600 font-medium">Altura (m):</p>
+      <p class="text-gray-900 font-bold"><%= user.height || "Não informado" %></p>
+    </div>
 
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Weight:</strong>
-    <%= user.weight %>
-  </p>
+    <div>
+      <p class="text-gray-600 font-medium">Peso (kg):</p>
+      <p class="text-gray-900 font-bold"><%= user.weight || "Não informado" %></p>
+    </div>
 
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Pas:</strong>
-    <%= user.pas %>
-  </p>
+    <div>
+      <p class="text-gray-600 font-medium">PAS (Pressão Sistólica):</p>
+      <p class="text-gray-900 font-bold"><%= user.pas || "Não informado" %></p>
+    </div>
 
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Pad:</strong>
-    <%= user.pad %>
-  </p>
+    <div>
+      <p class="text-gray-600 font-medium">PAD (Pressão Diastólica):</p>
+      <p class="text-gray-900 font-bold"><%= user.pad || "Não informado" %></p>
+    </div>
+
+    <div>
+      <p class="text-gray-600 font-medium">PAM (Pressão Arterial Média):</p>
+      <p class="text-gray-900 font-bold"><%= user.pam || "Não calculado" %></p>
+    </div>
+
+    <div>
+      <p class="text-gray-600 font-medium">TMB (Taxa Metabólica Basal):</p>
+      <p class="text-gray-900 font-bold"><%= user.tmb || "Não calculado" %></p>
+    </div>
+
+    <div>
+      <p class="text-gray-600 font-medium">Gênero:</p>
+      <p class="text-gray-900 font-bold">
+        <%= user.gender.present? ? (user.gender == "male" ? "Masculino" : "Feminino") : "Não informado" %>
+      </p>
+    </div>
+
+    <div>
+      <p class="text-gray-600 font-medium">Idade:</p>
+      <p class="text-gray-900 font-bold"><%= user.age || "Não informado" %></p>
+    </div>
+  </div>
+
+  <div class="mt-6 text-center">
+    <%= link_to 'Editar Informações', edit_user_path(user), class: "px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg" %>
+  </div>
+
+
+  <h2 class="text-xl font-bold mb-4">Telefones</h2>
+
+<% if @user&.phones&.any? %>
+  <ul class="list-disc ml-6">
+    <% @user.phones.each do |phone| %>
+      <li>
+        <%= phone.number %> - <%= phone.type.capitalize %>
+        <%= link_to 'Editar', edit_user_phone_path(@user, phone), class: 'text-blue-500 hover:underline ml-2' %>
+        <%= link_to 'Remover', user_phone_path(@user, phone), method: :delete, data: { confirm: 'Tem certeza que deseja remover?' }, class: 'text-red-500 hover:underline ml-2' %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>Sem telefones cadastrados.</p>
+<% end %>
+<br><br>
+<%= link_to 'Adicionar Novo Telefone', new_user_phone_path(user), class: 'bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600' if user.present? %>
+
 </div>
